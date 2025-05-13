@@ -31,6 +31,8 @@ app.use(express.static('public'));
 app.use('/fechas-historicas', fechaHistoricaRoutes);
 
 // Arrancar servidor
-app.listen(process.env.PORT, () => {
-  console.log(`Servidor corriendo en el puerto ${process.env.PORT}`);
+const PORT = process.env.PORT || 3007;  // Usa el puerto proporcionado por Render
+// Iniciar servidor
+app.listen(PORT, () => {
+  console.log(`Servidor corriendo en el puerto ${PORT}`);
 });
