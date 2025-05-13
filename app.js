@@ -17,11 +17,12 @@ app.use(express.json());
 
 // Configuración de CORS
 app.use(cors({
-  origin: 'https://frotend-git-main-david2323fws-projects.vercel.app',  // URL de tu frontend en Vercel
+  origin: '',  // URL de tu frontend en Vercel
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
 }));
+app.use(cors());
 
 // Archivos estáticos (si los usas)
 app.use(express.static('public'));
