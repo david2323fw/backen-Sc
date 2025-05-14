@@ -14,11 +14,11 @@ app.use(express.json());
 
 // Configuración de CORS: permitir cualquier origen (*), pero también el dominio específico
 app.use(cors({
-  origin: ['*', 'https://frontend-sc-git-main-david2323fws-projects.vercel.app'],  // Permitir cualquier dominio y el dominio específico
+  origin: ['*', 'https://frontend-sc-git-main-david2323fws-projects.vercel.app', 'http://localhost:8081'],  // Permitir varios orígenes
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
-  
 }));
+
 
 // Archivos estáticos (si usas la carpeta "public")
 app.use(express.static('public'));
