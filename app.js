@@ -9,30 +9,38 @@ dotenv.config();
 
 const app = express();
 
-// Conectar a la base de datos
-dbConnect();
-
 // Middleware para parsear JSON
 app.use(express.json());
 
-// Configuración de CORS
+// Configuración de CORS específica para tu frontend en Vercel
 app.use(cors({
-  origin: 'https://frontend-sc-git-main-david2323fws-projects.vercel.app',  // URL de tu frontend en Vercel
+  origin: 'https://frontend-sc-git-main-david2323fws-projects.vercel.app',
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
 }));
-app.use(cors());
 
-// Archivos estáticos (si los usas)
+// Archivos estáticos (si usas la carpeta "public")
 app.use(express.static('public'));
 
-// Rutas
+// Rutas de tu API
 app.use('/fechas-historicas', fechaHistoricaRoutes);
 
-// Arrancar servidor
-const PORT = process.env.PORT || 3007;  // Usa el puerto proporcionado por Render
-// Iniciar servidor
-app.listen(PORT, () => {
-  console.log(`Servidor corriendo en el puerto ${PORT}`);
-});
+// Arrancar servidor una vez conectada la base de datos
+const PORT = process.env.PORT;
+
+if (!PORT) {
+  throw new Error('PORT no definido en las variables de entorno');
+}
+
+dbConnect()
+  .then(() => {
+    app.listen(PORT, () => {
+      console.log(`✅ Servidor corriendo en el puerto ${PORT}`);
+    });
+  })
+  .catch((error) => {
+    console.error('❌ Error al conectar a la base de datos:', error);
+    process.exit(1); // Salir del proceso si falla la conexión
+  });
+
