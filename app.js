@@ -14,7 +14,7 @@ app.use(express.json());
 
 // Configuración de CORS específica para tu frontend en Vercel
 app.use(cors({
-  origin: 'https://frontend-sc-git-main-david2323fws-projects.vercel.app',
+  origin: 'https://frontend-sc-git-main-david2323fws-projects.vercel.app',  // URL de tu frontend
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
@@ -26,13 +26,10 @@ app.use(express.static('public'));
 // Rutas de tu API
 app.use('/fechas-historicas', fechaHistoricaRoutes);
 
-// Arrancar servidor una vez conectada la base de datos
-const PORT = process.env.PORT;
+// Usar el puerto proporcionado por Render, o 3007 para desarrollo local
+const PORT = process.env.PORT || 3007;
 
-if (!PORT) {
-  throw new Error('PORT no definido en las variables de entorno');
-}
-
+// Conectar a la base de datos y luego arrancar el servidor
 dbConnect()
   .then(() => {
     app.listen(PORT, () => {
