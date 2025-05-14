@@ -17,7 +17,7 @@ app.use(cors({
   origin: ['*', 'https://frontend-sc-git-main-david2323fws-projects.vercel.app'],  // Permitir cualquier dominio y el dominio específico
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true
+  
 }));
 
 // Archivos estáticos (si usas la carpeta "public")
