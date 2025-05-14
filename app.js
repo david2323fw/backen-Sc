@@ -12,9 +12,9 @@ const app = express();
 // Middleware para parsear JSON
 app.use(express.json());
 
-// Configuración de CORS específica para tu frontend en Vercel
+// Configuración de CORS: permitir cualquier origen (*), pero también el dominio específico
 app.use(cors({
-  origin: 'https://frontend-sc-git-main-david2323fws-projects.vercel.app',  // URL de tu frontend
+  origin: ['*', 'https://frontend-sc-git-main-david2323fws-projects.vercel.app'],  // Permitir cualquier dominio y el dominio específico
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
@@ -40,4 +40,3 @@ dbConnect()
     console.error('❌ Error al conectar a la base de datos:', error);
     process.exit(1); // Salir del proceso si falla la conexión
   });
-
